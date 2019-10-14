@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('/Users/liangzhentao/Desktop/Project/Player/PlayerH5PackageDemo/KeyStore/bingguo.keystore')
+            storePassword 'bingguo123456'
+            keyAlias = 'bingguo'
+            keyPassword 'bingguo123456'
+        }
+        debug {
+            storeFile file('/Users/liangzhentao/Desktop/Project/Player/PlayerH5PackageDemo/KeyStore/bingguo.keystore')
+            storePassword 'bingguo123456'
+            keyAlias = 'bingguo'
+            keyPassword 'bingguo123456'
+        }
+    }
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        applicationId "com.player.game.union.h5.demo"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'armeabi-v7a', 'x86'//, 'armeabi', 'x86_64', 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+        xmlReport false
+        check 'NewApi', 'InlinedApi'
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            jni.srcDirs = ['jni']
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation files('libs/alipaySdk-20180601.jar')
+    implementation files('libs/gson-2.8.5.jar')
+    implementation files('libs/okhttp-3.10.0.jar')
+    implementation files('libs/okio-1.14.0.jar')
+    implementation files('libs/PlayerGameUnionSdk_V3.0.0.jar')
+}
