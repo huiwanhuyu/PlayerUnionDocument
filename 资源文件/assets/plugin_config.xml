@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugins>
+    <plugin name="com.player.game.union.channel.Channel_DefaultSdk_User" desc="用户登录接口" type="1" />
+    <plugin name="com.player.game.union.channel.Channel_DefaultSdk_Pay" desc="用户支付接口" type="2" />
+</plugins>
