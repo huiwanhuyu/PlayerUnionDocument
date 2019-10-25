@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 
 import com.player.game.union.PlayerGameApplication;
+import com.player.game.union.h5.demo.control.GameControl;
 
 /**
  * Author      : PillowCase
@@ -14,18 +15,20 @@ public class GameApplication extends PlayerGameApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        PlayerGameApplication.onProxyCreate(this);
+        GameControl.getInstance().init(this);
+
+//        PlayerGameApplication.onProxyCreate(this);
     }
 
     @Override
     public void attachBaseContext(Context context) {
         super.attachBaseContext(context);
-        PlayerGameApplication.onProxyAttachBaseContext(this, context);
+//        PlayerGameApplication.onProxyAttachBaseContext(this, context);
     }
 
     @Override
     public void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
-        PlayerGameApplication.onProxyConfigurationChanged(configuration);
+//        PlayerGameApplication.onProxyConfigurationChanged(configuration);
     }
 }

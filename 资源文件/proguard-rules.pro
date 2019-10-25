@@ -105,7 +105,7 @@
     public void *(android.webkit.WebView, jav.lang.String);
 }
 #----------------------------------------------------------------------------
-#---------------------------------第三方库混淆------------------------------------
+#---------------------------------第三方混淆------------------------------------
 # OkHttp
 -keep class com.squareup.okhttp.** { *; }
 -keep interface com.squareup.okhttp.** { *; }
@@ -127,27 +127,40 @@
 -keep class sun.misc.Unsafe { *; }
 -keep class com.google.gson.stream.** { *; }
 # 使用Gson时需要配置Gson的解析对象及变量都不混淆。不然Gson会找不到变量。
-#----------------------------------------------------------------------------
-#---------------------------------SDK混淆------------------------------------
+
+#腾讯广点通DMP行为数据上报
 -dontwarn com.qq.gdt.action.**
 -keep class com.qq.gdt.action.** {*;}
 
--dontwarn class com.pillowcase.**
--keep class com.pillowcase.**{
+-keep class com.pillowcase.data.report.gdt.GdtDmpManager{
     public *;
 }
-
+#头条数据上报
 -keep class com.bytedance.**{
     *;
 }
 -keep class com.ss.android.common.**{
     *;
 }
+#OAID
 -keep class com.bun.miitmdid.** {*;}
--keep class com.zt.emulator.EmulatorUtls{
+
+-keep class com.pillowcase.data.report.tt.TtAppLogManager{
     public *;
 }
-
+-keep class com.pillowcase.data.report.tt.TtApplication{
+    public *;
+}
+-keep class com.pillowcase.data.report.tt.impl.ISupportListener{
+    public *;
+}
+#模拟器检测
+-keep class com.pillowcase.normal.tools.emulator.**{*;}
+#LoggerTools
+-keep class com.pillowcase.normal.tools.logger.**{*;}
+#PermissionUtils
+-keep class com.pillowcase.normal.tools.permission.**{*;}
+#---------------------------------SDK处理------------------------------------
 -keep class com.player.sdk.PlayerSdk{*;}
 -keep class com.player.sdk.PlayerApplication{public *;}
 -keep class com.player.sdk.impl.sdk.ISdkListener{*;}
@@ -165,13 +178,44 @@
     public *;
 }
 
--dontwarn class com.player.sdk.**
--keep class com.player.sdk.**{
-    *;
+-keep class com.player.sdk.model.api.ApiRequest{*;}
+-keep class com.player.sdk.model.api.DataRequest{*;}
+-keep class com.player.sdk.model.local.LocalUserBean{*;}
+-keep class com.player.sdk.model.pay.PlayerPayParams{*;}
+-keep class com.player.sdk.model.CurrentUserBean{*;}
+-keep class com.player.sdk.model.CustomerInfo{*;}
+
+-keep class com.player.sdk.manager.local.YybLocalAccountManager{
+    public *;
 }
 
--dontwarn class com.player.game.union.**
--keep class com.player.game.union.**{
-    *;
-}
+-keep class com.player.sdk.utils.AssetsUtils{*;}
+-keep class com.player.sdk.utils.Md5Utils{*;}
+-keep class com.player.sdk.utils.RsaUtils{*;}
+-keep class com.player.sdk.utils.NetWorkUtils{*;}
+-keep class com.player.sdk.utils.SharedPreferencesUtils{*;}
+-keep class com.player.sdk.utils.DeviceUtils{*;}
 #----------------------------------------------------------------------------
+
+#---------------------------------内部处理------------------------------------
+-keep class com.player.game.union.PlayerGameUnionSdk{*;}
+-keep class com.player.game.union.PlayerGameApplication{
+    public *;
+}
+
+-keep class com.player.game.union.model.sdk.GameUnionInitParams{*;}
+-keep class com.player.game.union.model.GameUnionUserExtraData{*;}
+-keep class com.player.game.union.model.GameUnionPayParams{*;}
+
+-keep class com.player.game.union.model.api.GameUnionApiMethod{*;}
+-keep class com.player.game.union.model.api.GameUnionApiRequest{*;}
+-keep class com.player.game.union.model.code.GameUnionCode{*;}
+-keep class com.player.game.union.model.GameUnionOrderParams{*;}
+-keep class com.player.game.union.model.SdkToken{*;}
+
+-keep class com.player.game.union.impl.sdk.IApplicationListener{*;}
+-keep class com.player.game.union.impl.sdk.IGameUnionSdkCallback{*;}
+
+-keep class com.player.game.union.channel.**{public *;}
+#----------------------------------------------------------------------------
+

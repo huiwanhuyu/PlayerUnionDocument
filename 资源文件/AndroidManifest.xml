@@ -1,44 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.player.game.union.h5.demo">
+    package="com.player.game.union">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
+
 
     <application
-        android:name="com.player.game.union.h5.demo.GameApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/icon"
-        android:label="@string/game_name"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:roundIcon="@mipmap/icon"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"
+        android:networkSecurityConfig="@xml/player_network_security_config"
         tools:targetApi="n">
-        <activity android:name="com.player.game.union.h5.demo.GameActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <!--是否配置闪屏图-->
-        <meta-data
-            android:name="Splash"
-            android:value="True" />
-
         <activity
             android:name="com.player.sdk.ui.PlayerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -46,28 +24,30 @@
             android:theme="@style/PlayerAppTheme" />
 
         <activity
-            android:name="com.yanzhenjie.permission.bridge.BridgeActivity"
-            android:theme="@style/Permission.Theme" />
+            android:name="com.pillowcase.normal.tools.permission.ui.PermissionRequestActivity"
+            android:theme="@style/PermissionRequestTheme" />
 
         <provider
-            android:name="com.yanzhenjie.permission.FileProvider"
-            android:authorities="${applicationId}.file.path.share"
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/permission_file_paths" />
+                android:resource="@xml/player_file_paths" />
         </provider>
+
+        <provider
+            android:name="com.player.sdk.provider.PlayerShareContentProvider"
+            android:authorities="${applicationId}.share.provider"
+            android:enabled="true"
+            android:exported="true"
+            android:grantUriPermissions="true" />
 
         <meta-data
             android:name="isPhoneRegister"
             android:value="True" />
-
-        <meta-data
-            android:name="SlD"
-            android:value="True" />
-
-        <!--头条数据上报配置-->
+        <!-- 头条数据上报配置 -->
         <meta-data
             android:name="TT"
             android:value="False" />
@@ -76,30 +56,28 @@
             android:value="False" />
         <meta-data
             android:name="AppLog_Aid"
-            android:value="0" />
+            android:value="" />
         <meta-data
             android:name="Game_Name"
-            android:value="0" />
+            android:value="" />
         <meta-data
             android:name="channel"
-            android:value="0" />
-        <!--头条数据上报配置-->
-
-        <!--腾讯广点通数据上报配置-->
+            android:value="" />
+        <!-- 头条数据上报配置 -->
+        <!-- 腾讯广点通数据上报配置 -->
         <meta-data
             android:name="Gdt"
             android:value="False" />
         <meta-data
             android:name="Gdt_UserActionSetId"
-            android:value="0" />
+            android:value="" />
         <meta-data
             android:name="Gdt_AppSecretKey"
-            android:value="0" />
-        <!--腾讯广点通数据上报配置-->
+            android:value="" />
+        <!-- 腾讯广点通数据上报配置 -->
 
         <meta-data
             android:name="APPLICATION_PROXY_NAME"
             android:value="com.player.game.union.channel.Channel_DefaultSdk_Application" />
     </application>
-
 </manifest>

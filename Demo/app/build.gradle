@@ -68,5 +68,5 @@ dependencies {
     implementation files('libs/gson-2.8.5.jar')
     implementation files('libs/okhttp-3.10.0.jar')
     implementation files('libs/okio-1.14.0.jar')
-    implementation files('libs/PlayerGameUnionSdk_V3.0.0.jar')
+    implementation files('libs/PlayerGameUnionSdk_V3.0.1.jar')
 }

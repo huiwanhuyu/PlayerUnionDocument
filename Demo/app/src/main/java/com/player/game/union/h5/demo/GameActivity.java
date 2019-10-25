@@ -61,6 +61,12 @@ public class GameActivity extends Activity {
     }
 
     @Override
+    protected void onRestart() {
+        PlayerGameUnionSdk.getInstance().onRestart(GameActivity.this);
+        super.onRestart();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         if (mWebView != null) {
@@ -101,12 +107,6 @@ public class GameActivity extends Activity {
     protected void onNewIntent(Intent intent) {
         PlayerGameUnionSdk.getInstance().onNewIntent(GameActivity.this, intent);
         super.onNewIntent(intent);
-    }
-
-    @Override
-    protected void onRestart() {
-        PlayerGameUnionSdk.getInstance().onRestart(GameActivity.this);
-        super.onRestart();
     }
 
     @Override
@@ -296,10 +296,17 @@ public class GameActivity extends Activity {
         @Override
         public void onErrorCallback(GameUnionCode code, String message) {
             log("onErrorCallback", "Code : " + code + " , Message : " + message);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (loadingLayout != null && loadingLayout.getVisibility() == View.VISIBLE) {
+                        loadingLayout.setVisibility(View.GONE);
+                    }
+                }
+            });
             Toast.makeText(GameActivity.this, "ErrorCode : " + code + " , Message : " + message, Toast.LENGTH_SHORT).show();
         }
     };
-
 
     public void log(final String s, final Object o) {
         runOnUiThread(new Runnable() {
